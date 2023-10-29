@@ -1,5 +1,12 @@
+.App {
+  background-color: #fff1f1;
+  padding: 10px;
+}
+
 .cube {
-  border: 1px solid black;
+  outline: 1px solid black;
+  background-color: white;
+  z-index: 2;
 }
 
 .centeredText {
@@ -8,19 +15,16 @@
   width: 100%;
   align-items: center;
   justify-content: center;
+  font-size: small;
+  user-select: none;
 }
 
 .grid-container {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  gap: 10px;
-  background-color: #2196f3;
-  padding: 10px;
+  display: inline-grid;
+  background-color: black;
 }
 
 .grid-container > div {
-  background-color: rgba(255, 255, 255, 0.8);
-  text-align: center;
-  padding: 20px 0;
-  font-size: 30px;
+  background-color: white;
+  outline: 1px solid black;
 }
