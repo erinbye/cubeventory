@@ -1,6 +1,6 @@
 .App {
   background-color: #fff1f1;
-  padding: 10px;
+  padding: 50px;
 }
 
 .cube {
@@ -27,4 +27,10 @@
 .grid-container > div {
   background-color: white;
   outline: 1px solid black;
+}
+
+.item-container {
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
 }
