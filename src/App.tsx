@@ -66,15 +66,8 @@ const Cubeventory = ({
   );
 };
 
-const Cube = ({
-  name,
-  size,
-  color,
-}: {
-  name: string;
-  size: number[];
-  color: string;
-}): JSX.Element => {
+const Cube = ({ item }: { item: ItemWithId }): JSX.Element => {
+  const { name, size, color } = item;
   const height = `${BASE_SIZE * size[0]}px`;
   const width = `${BASE_SIZE * size[1]}px`;
   return (
@@ -218,13 +211,8 @@ const App = (): JSX.Element => {
               <div className="item-container">
                 {currentItems ? (
                   <>
-                    {currentItems.map((choice) => (
-                      <Cube
-                        key={choice.id}
-                        name={choice.name}
-                        size={choice.size}
-                        color={choice.color}
-                      />
+                    {currentItems.map((it) => (
+                      <Cube key={it.id} item={it} />
                     ))}
                   </>
                 ) : null}
