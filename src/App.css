@@ -1,12 +1,13 @@
 .App {
-  background-color: #fff1f1;
-  padding: 50px;
+  background-color: white;
+  padding: 10px;
 }
 
 .cube {
-  outline: 1px solid black;
+  outline: 2px solid black;
   background-color: white;
   z-index: 2;
+  position: absolute;
 }
 
 .centeredText {
@@ -21,16 +22,26 @@
 
 .grid-container {
   display: inline-grid;
-  background-color: black;
 }
 
 .grid-container > div {
-  background-color: white;
-  outline: 1px solid black;
+  outline: 2px solid black;
 }
 
 .item-container {
   padding: 20px;
   border: 1px solid black;
   border-radius: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.settings {
+  padding: 10px;
+}
+
+.gridArea {
+  padding: 10px;
 }

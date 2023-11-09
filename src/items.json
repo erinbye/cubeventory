@@ -1,0 +1,7 @@
+{
+  "items": [
+    { "name": "1/4", "size": [1, 1], "color": "white" },
+    { "name": "1", "size": [2, 2], "color": "lightblue" },
+    { "name": "Dagger", "size": [2, 2], "color": "pink" }
+  ]
+}
