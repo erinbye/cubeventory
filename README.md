@@ -1,3 +1,9 @@
+### Production
+
+Deployed to https://erinbye.github.io/cubeventory/
+
+### Development
+
 In the project directory, run:
 
 ```
