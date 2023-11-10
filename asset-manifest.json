@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/cubeventory/static/css/main.e684e78b.css",
+    "main.js": "/cubeventory/static/js/main.02735902.js",
+    "index.html": "/cubeventory/index.html",
+    "main.e684e78b.css.map": "/cubeventory/static/css/main.e684e78b.css.map",
+    "main.02735902.js.map": "/cubeventory/static/js/main.02735902.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e684e78b.css",
+    "static/js/main.02735902.js"
+  ]
+}
