@@ -157,17 +157,19 @@ const Dropdown = ({
   label,
   setExternally,
   initialChoice = "",
+  resetAfterPick,
 }: {
   choices: string[];
   label: string;
   setExternally?: (choice: string) => void;
   initialChoice?: string;
+  resetAfterPick?: boolean;
 }): JSX.Element => {
   const [choiceName, setChoiceName] = useState(initialChoice);
 
   const handleChange = (e: SelectChangeEvent) => {
     const val = e.target.value;
-    setChoiceName(val);
+    setChoiceName(resetAfterPick ? initialChoice : val);
     if (setExternally) {
       setExternally(val);
     }
@@ -244,6 +246,7 @@ const App = (): JSX.Element => {
                   choices={choices.map((choice) => choice.name)}
                   label="Choices"
                   setExternally={selectedChoice}
+                  resetAfterPick
                 />
                 <Dropdown
                   choices={oneToTwenty}
