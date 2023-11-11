@@ -8,6 +8,7 @@ import {
   SelectChangeEvent,
   Grid,
   Button,
+  Box,
 } from "@mui/material";
 import { useState, useRef } from "react";
 import jsonData from "./items.json";
@@ -59,12 +60,13 @@ const setLocalItems = (items: PersonalItem[]) => {
   localStorage.setItem(INVENTORY_ITEMS_KEY, updatedItems);
 };
 
-// const removeLocalItem = (itemToRemove: PersonalItem) => {
-//   const localItems = getLocalItems();
-//   if (localItems.includes(itemToRemove)) {
-//     localItems.filter((locItem) => locItem != itemToRemove);
-//   }
-// };
+const removeLocalItem = (itemToRemove: PersonalItem) => {
+  const localItems = getLocalItems();
+  const updatedItems = localItems.filter(
+    (locItem) => locItem.id != itemToRemove.id
+  );
+  setLocalItems(updatedItems);
+};
 
 const startOverLocalStorage = () => {
   setLocalItems([]);
@@ -126,26 +128,44 @@ const getCoords = (el: HTMLElement) => {
 const Cube = ({
   item,
   initialCoords,
+  openModal,
 }: {
   item: PersonalItem;
   initialCoords: number[];
+  openModal: (it: PersonalItem) => void;
 }): JSX.Element => {
   const { id, name, size, color, coords } = item;
-  let defaultPos = { x: initialCoords[0], y: initialCoords[1] };
+  const heightNum = BASE_SIZE * size[0] - 4;
+  const widthNum = BASE_SIZE * size[1] - 4;
+  let defaultPos = {
+    x: initialCoords[0] - widthNum / 2,
+    y: initialCoords[1] - heightNum / 2,
+  };
   if (coords) {
     defaultPos = { x: coords[0], y: coords[1] };
   }
-  const height = `${BASE_SIZE * size[0] - 4}px`;
-  const width = `${BASE_SIZE * size[1] - 4}px`;
+
+  const height = `${heightNum}px`;
+  const width = `${widthNum}px`;
 
   const onDrop = (e: any) => {
     const newCoords = getCoords(e.srcElement);
     updateCoordsOfItem(id, newCoords);
   };
 
+  const handleDoubleClick = (e: any) => {
+    if (e.detail === 2) {
+      openModal(item);
+    }
+  };
+
   return (
     <Draggable defaultPosition={defaultPos} onStop={onDrop}>
-      <div className="cube" style={{ height, width, backgroundColor: color }}>
+      <div
+        className="cube"
+        style={{ height, width, backgroundColor: color }}
+        onClick={handleDoubleClick}
+      >
         <CenteredText>{name}</CenteredText>
       </div>
     </Draggable>
@@ -190,12 +210,35 @@ const Dropdown = ({
   );
 };
 
+const ItemModal = ({
+  item,
+  onClose,
+}: {
+  item: PersonalItem;
+  onClose: () => void;
+}) => {
+  return (
+    <div className="itemModal">
+      <Box>{item.name}</Box>
+      <div>
+        <Button onClick={() => removeLocalItem(item)}>
+          Remove Item (refresh)
+        </Button>
+      </div>
+      <div className="modalClose">
+        <Button onClick={onClose}>Close</Button>
+      </div>
+    </div>
+  );
+};
+
 const App = (): JSX.Element => {
   const choices = jsonData.items;
   const [strength, setStrength] = useState<number>(getLocalStrength());
   const [currentItems, setCurrentItems] = useState<PersonalItem[]>(
     getLocalItems()
   );
+  const [openedItem, setOpenedItem] = useState<PersonalItem | null>(null);
   const centerItemContainerRef = useRef<HTMLDivElement>(null);
   const initialCubeCoords = centerItemContainerRef.current
     ? getCoords(centerItemContainerRef.current)
@@ -224,11 +267,23 @@ const App = (): JSX.Element => {
     }
   };
 
+  const openItemModal = (item: PersonalItem) => {
+    setOpenedItem(item);
+  };
+
   return (
     <div>
       {currentItems.map((it) => (
-        <Cube key={it.id} item={it} initialCoords={initialCubeCoords} />
+        <Cube
+          key={it.id}
+          item={it}
+          initialCoords={initialCubeCoords}
+          openModal={openItemModal}
+        />
       ))}
+      {openedItem ? (
+        <ItemModal item={openedItem} onClose={() => setOpenedItem(null)} />
+      ) : null}
       <div className="wrapper">
         <Grid container className="all">
           <Grid item className="settings" xs={2.5}>
@@ -260,7 +315,7 @@ const App = (): JSX.Element => {
                   onClick={() => startOverLocalStorage()}
                   disabled={false}
                 >
-                  Delete All Items
+                  Delete All Items (refresh)
                 </Button>
               </Grid>
               <Grid container item xs>
