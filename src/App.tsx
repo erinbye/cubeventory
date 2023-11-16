@@ -60,16 +60,15 @@ const setLocalItems = (items: PersonalItem[]) => {
   localStorage.setItem(INVENTORY_ITEMS_KEY, updatedItems);
 };
 
-const removeLocalItem = (itemToRemove: PersonalItem) => {
+const removeLocalItem = (
+  itemToRemove: PersonalItem,
+  setCurrentItems: (items: PersonalItem[]) => void
+) => {
   const localItems = getLocalItems();
   const updatedItems = localItems.filter(
     (locItem) => locItem.id != itemToRemove.id
   );
-  setLocalItems(updatedItems);
-};
-
-const startOverLocalStorage = () => {
-  setLocalItems([]);
+  setCurrentItems(updatedItems);
 };
 
 const generateId = (): string => {
@@ -213,17 +212,21 @@ const Dropdown = ({
 const ItemModal = ({
   item,
   onClose,
+  setCurrentItems,
 }: {
   item: PersonalItem;
   onClose: () => void;
+  setCurrentItems: (items: PersonalItem[]) => void;
 }) => {
+  const removeItem = () => {
+    removeLocalItem(item, setCurrentItems);
+    onClose();
+  };
   return (
     <div className="itemModal">
       <Box>{item.name}</Box>
       <div>
-        <Button onClick={() => removeLocalItem(item)}>
-          Remove Item (refresh)
-        </Button>
+        <Button onClick={removeItem}>Remove Item</Button>
       </div>
       <div className="modalClose">
         <Button onClick={onClose}>Close</Button>
@@ -252,12 +255,16 @@ const App = (): JSX.Element => {
     setLocalStrength(val);
   };
 
+  const setCurrentItemsLocally = (items: PersonalItem[]) => {
+    setCurrentItems(items);
+    setLocalItems(items);
+  };
+
   const addLocalItem = (newItem: ChoiceItem) => {
     const parsedItems = getLocalItems();
     const newItemWithId = { ...newItem, id: generateId() } as PersonalItem;
     parsedItems.push(newItemWithId);
-    setLocalItems(parsedItems);
-    setCurrentItems(parsedItems);
+    setCurrentItemsLocally(parsedItems);
   };
 
   const selectedChoice = (nameOfChoice: string) => {
@@ -282,7 +289,11 @@ const App = (): JSX.Element => {
         />
       ))}
       {openedItem ? (
-        <ItemModal item={openedItem} onClose={() => setOpenedItem(null)} />
+        <ItemModal
+          item={openedItem}
+          onClose={() => setOpenedItem(null)}
+          setCurrentItems={setCurrentItemsLocally}
+        />
       ) : null}
       <div className="wrapper">
         <Grid container className="all">
@@ -312,10 +323,10 @@ const App = (): JSX.Element => {
                 <Button
                   variant="contained"
                   color="error"
-                  onClick={() => startOverLocalStorage()}
+                  onClick={() => setCurrentItemsLocally([])}
                   disabled={false}
                 >
-                  Delete All Items (refresh)
+                  Delete All Items
                 </Button>
               </Grid>
               <Grid container item xs>
