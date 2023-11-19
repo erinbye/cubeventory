@@ -2,6 +2,53 @@
   "items": [
     { "name": "1/4", "size": [1, 1], "color": "white" },
     { "name": "1", "size": [2, 2], "color": "lightblue" },
-    { "name": "Dagger", "size": [2, 2], "color": "pink" }
+
+    { "name": "Club", "size": [2, 4], "color": "pink" },
+    { "name": "Dagger", "size": [1, 4], "color": "pink" },
+    { "name": "Greatclub", "size": [2, 10], "color": "pink" },
+    { "name": "Handaxe", "size": [2, 4], "color": "pink" },
+    { "name": "Javelin", "size": [1, 8], "color": "pink" },
+    { "name": "Light Hammer", "size": [2, 4], "color": "pink" },
+    { "name": "Mace", "size": [2, 8], "color": "pink" },
+    { "name": "Quarterstaff", "size": [1, 8], "color": "pink" },
+    { "name": "Sickle", "size": [2, 3], "color": "pink" },
+    { "name": "Spear", "size": [1, 6], "color": "pink" },
+
+    { "name": "Crossbow, Light", "size": [4, 6], "color": "pink" },
+    { "name": "Dart", "size": [1, 1], "color": "pink" },
+    { "name": "Shortbow", "size": [2, 4], "color": "pink" },
+    { "name": "Sling", "size": [1, 1], "color": "pink" },
+
+    { "name": "Battleaxe", "size": [2, 4], "color": "pink" },
+    { "name": "Flail", "size": [2, 2], "color": "pink" },
+    { "name": "Glaive", "size": [2, 12], "color": "pink" },
+    { "name": "Greataxe", "size": [4, 7], "color": "pink" },
+    { "name": "Greatsword", "size": [3, 8], "color": "pink" },
+    { "name": "Halberd", "size": [2, 14], "color": "pink" },
+    { "name": "Lance", "size": [1, 12], "color": "pink" },
+    { "name": "Longsword", "size": [1, 6], "color": "pink" },
+    { "name": "Maul", "size": [2, 10], "color": "pink" },
+    { "name": "Morningstar", "size": [2, 8], "color": "pink" },
+    { "name": "Pike", "size": [3, 12], "color": "pink" },
+    { "name": "Rapier", "size": [1, 4], "color": "pink" },
+    { "name": "Scimitar", "size": [1, 6], "color": "pink" },
+    { "name": "Shortsword", "size": [2, 4], "color": "pink" },
+    { "name": "Trident", "size": [1, 7], "color": "pink" },
+    { "name": "War Pick", "size": [2, 3], "color": "pink" },
+    { "name": "Warhammer", "size": [2, 2], "color": "pink" },
+    { "name": "Whip", "size": [2, 2], "color": "pink" },
+
+    { "name": "Blowgun", "size": [1, 5], "color": "pink" },
+    { "name": "Crossbow, Hand", "size": [2, 3], "color": "pink" },
+    { "name": "Crossbow, Heavy", "size": [6, 6], "color": "pink" },
+    { "name": "Longbow", "size": [2, 8], "color": "pink" },
+    { "name": "Net", "size": [2, 2], "color": "pink" },
+
+    { "name": "Arrow Case", "size": [1, 4], "color": "yellow"},
+    { "name": "Blowgun Needles", "size": [2, 2], "color": "yellow"},
+    { "name": "Crossbow Case", "size": [2, 3], "color": "yellow" },
+    { "name": "Sling bullets", "size": [2, 3], "color": "yellow" },
+
+    { "name": "Potion", "size": [1, 1], "color": "blue" }
   ]
 }
