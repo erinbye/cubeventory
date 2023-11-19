@@ -121,7 +121,7 @@ const updateCoordsOfItem = (itemIdToUpdate: string, newCoords: number[]) => {
 
 const getCoords = (el: HTMLElement) => {
   const rect = el.getBoundingClientRect();
-  return [rect.x, rect.y];
+  return [rect.x + window.scrollX, rect.y + window.scrollY];
 };
 
 const Cube = ({
