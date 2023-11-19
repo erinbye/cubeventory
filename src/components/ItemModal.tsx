@@ -1,4 +1,4 @@
-import "./App.css";
+import "../App.css";
 import { Button, Box } from "@mui/material";
 import { PersonalItem } from "../types";
 import { removeLocalItem } from "../functions";

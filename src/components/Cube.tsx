@@ -1,4 +1,4 @@
-import "./App.css";
+import "../App.css";
 import Draggable from "react-draggable";
 import { PersonalItem } from "../types";
 import { BASE_SIZE } from "../constants";
