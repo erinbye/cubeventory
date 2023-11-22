@@ -1,4 +1,4 @@
-import { ChoiceItem, PersonalItem } from "./types";
+import { PersonalItem } from "./types";
 import {
   INITIAL_STRENGTH,
   INVENTORY_ITEMS_KEY,
@@ -29,6 +29,17 @@ const getLocalItems = (): PersonalItem[] => {
 const setLocalItems = (items: PersonalItem[]) => {
   const updatedItems = JSON.stringify(items);
   localStorage.setItem(INVENTORY_ITEMS_KEY, updatedItems);
+};
+
+const updateLocalItem = (
+  itemToUpdate: PersonalItem,
+  setCurrentItems: (items: PersonalItem[]) => void
+) => {
+  const localItems = getLocalItems();
+  const updatedItems = localItems.map((locItem) =>
+    locItem.id === itemToUpdate.id ? itemToUpdate : locItem
+  );
+  setCurrentItems(updatedItems);
 };
 
 const removeLocalItem = (
@@ -68,4 +79,5 @@ export {
   generateId,
   updateCoordsOfItem,
   getCoords,
+  updateLocalItem,
 };
