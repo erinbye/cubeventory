@@ -19,6 +19,7 @@
   justify-content: center;
   font-size: small;
   user-select: none;
+  text-align: center;
 }
 
 .grid-container {
@@ -59,13 +60,13 @@
   padding: 10px;
 }
 
-.modalClose {
+.modalBottomRight {
   position: absolute;
   bottom: 2px;
   right: 2px;
 }
 
-.removeItemButton {
+.modalBottomLeft {
   position: absolute;
   bottom: 2px;
   left: 2px;

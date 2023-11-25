@@ -106,7 +106,7 @@ const App = (): JSX.Element => {
                   variant="contained"
                   color="error"
                   onClick={() => setCurrentItemsLocally([])}
-                  disabled={false}
+                  disabled={true}
                 >
                   Delete All Items
                 </Button>
