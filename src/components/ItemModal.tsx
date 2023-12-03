@@ -56,7 +56,7 @@ const TitleBox = ({
           onKeyDown={handleKeyDown}
         />
       ) : (
-        <Box>{title}</Box>
+        <Box>{tempTitle}</Box>
       )}
     </div>
   );
@@ -94,14 +94,11 @@ export const ItemModal = ({
     onClose();
   };
   const rotateItem = () => {
-    // TODO: figure out how best to save the coords again (they mess up if you refresh)
     const rotatedSize = [item.size[1], item.size[0]];
-    item.size = rotatedSize;
-    updateLocalItem(item, setCurrentItems);
+    updateLocalItem(item.id, "size", rotatedSize, setCurrentItems);
   };
   const updateTitle = (newTitle: string) => {
-    item.name = newTitle;
-    updateLocalItem(item, setCurrentItems);
+    updateLocalItem(item.id, "name", newTitle, setCurrentItems);
   };
   return (
     <div className="itemModal">

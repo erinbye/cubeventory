@@ -32,12 +32,16 @@ const setLocalItems = (items: PersonalItem[]) => {
 };
 
 const updateLocalItem = (
-  itemToUpdate: PersonalItem,
+  itemIdToUpdate: string,
+  propertyToUpdate: string,
+  newValue: any,
   setCurrentItems: (items: PersonalItem[]) => void
 ) => {
   const localItems = getLocalItems();
   const updatedItems = localItems.map((locItem) =>
-    locItem.id === itemToUpdate.id ? itemToUpdate : locItem
+    locItem.id === itemIdToUpdate
+      ? { ...locItem, [propertyToUpdate]: newValue }
+      : locItem
   );
   setCurrentItems(updatedItems);
 };
