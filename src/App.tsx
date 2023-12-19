@@ -1,5 +1,5 @@
 import "./App.css";
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, Stack } from "@mui/material";
 import { useState, useRef } from "react";
 import jsonData from "./items.json";
 import { ItemModal } from "./components/ItemModal";
@@ -68,6 +68,7 @@ const App = (): JSX.Element => {
           item={it}
           initialCoords={initialCubeCoords}
           openModal={openItemModal}
+          currentlyOpen={openedItem === it}
         />
       ))}
       {openedItem ? (
@@ -79,7 +80,7 @@ const App = (): JSX.Element => {
       ) : null}
       <div className="wrapper">
         <Grid container className="all">
-          <Grid item className="settings" xs={2.5}>
+          <Grid item className="settings" xs={2}>
             <Grid
               container
               rowGap={3}
@@ -106,7 +107,7 @@ const App = (): JSX.Element => {
                   variant="contained"
                   color="error"
                   onClick={() => setCurrentItemsLocally([])}
-                  disabled={false}
+                  disabled={true}
                 >
                   Delete All Items
                 </Button>
@@ -120,7 +121,7 @@ const App = (): JSX.Element => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item className="gridArea" xs>
+          <Grid item className="gridArea">
             <Grid container item>
               <Cubeventory
                 cols={colSize}
@@ -145,6 +146,23 @@ const App = (): JSX.Element => {
                 color="#A3BFAF" //green
               />
             </Grid>
+          </Grid>
+          <Grid item className="item-list" xs={2}>
+            <div className="list-box">
+              <Stack height="100%" padding={2}>
+                {currentItems.map((item) => (
+                  <div
+                    className="list-item"
+                    style={
+                      openedItem === item ? { fontWeight: "bold" } : undefined
+                    }
+                    onClick={() => setOpenedItem(item)}
+                  >
+                    {item.name}
+                  </div>
+                ))}
+              </Stack>
+            </div>
           </Grid>
         </Grid>
       </div>

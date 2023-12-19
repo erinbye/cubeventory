@@ -1,4 +1,4 @@
-const BASE_SIZE: number = 27; // blocks (1/4 pound each)
+const BASE_SIZE: number = 26; // blocks (1/4 pound each)
 const MULTIPLIER: number = 2; // to keep each pound 2x2
 const INITIAL_STRENGTH = 10;
 const INVENTORY_ITEMS_KEY = "inventory_items";

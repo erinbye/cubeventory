@@ -32,12 +32,16 @@ const setLocalItems = (items: PersonalItem[]) => {
 };
 
 const updateLocalItem = (
-  itemToUpdate: PersonalItem,
+  itemIdToUpdate: string,
+  propertyToUpdate: string,
+  newValue: any,
   setCurrentItems: (items: PersonalItem[]) => void
 ) => {
   const localItems = getLocalItems();
   const updatedItems = localItems.map((locItem) =>
-    locItem.id === itemToUpdate.id ? itemToUpdate : locItem
+    locItem.id === itemIdToUpdate
+      ? { ...locItem, [propertyToUpdate]: newValue }
+      : locItem
   );
   setCurrentItems(updatedItems);
 };
@@ -70,6 +74,12 @@ const getCoords = (el: HTMLElement) => {
   return [rect.x + window.scrollX, rect.y + window.scrollY];
 };
 
+const handleDoubleClick = (e: any, func: () => void) => {
+  if (e.detail === 2) {
+    func();
+  }
+};
+
 export {
   getLocalStrength,
   setLocalStrength,
@@ -80,4 +90,5 @@ export {
   updateCoordsOfItem,
   getCoords,
   updateLocalItem,
+  handleDoubleClick,
 };
