@@ -9,6 +9,12 @@
   z-index: 2;
   position: absolute;
   border-radius: 4px;
+  transition: outline 300ms ease-in-out;
+}
+
+.cube-open {
+  z-index: 3;
+  outline: 4px solid black;
 }
 
 .centeredText {
@@ -20,6 +26,7 @@
   font-size: small;
   user-select: none;
   text-align: center;
+  text-overflow: ellipsis;
 }
 
 .grid-container {
@@ -70,4 +77,25 @@
   position: absolute;
   bottom: 2px;
   left: 2px;
+}
+
+.item-list {
+  padding: 10px;
+}
+
+.list-box {
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.list-item {
+  cursor: pointer;
+  user-select: none;
+  transition: all 300ms ease-in-out;
+}
+
+.list-item:hover {
+  color: gray;
 }

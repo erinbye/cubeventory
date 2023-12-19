@@ -74,6 +74,12 @@ const getCoords = (el: HTMLElement) => {
   return [rect.x + window.scrollX, rect.y + window.scrollY];
 };
 
+const handleDoubleClick = (e: any, func: () => void) => {
+  if (e.detail === 2) {
+    func();
+  }
+};
+
 export {
   getLocalStrength,
   setLocalStrength,
@@ -84,4 +90,5 @@ export {
   updateCoordsOfItem,
   getCoords,
   updateLocalItem,
+  handleDoubleClick,
 };

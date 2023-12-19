@@ -1,8 +1,9 @@
 import "../App.css";
+import cn from "classnames";
 import Draggable from "react-draggable";
 import { PersonalItem } from "../types";
 import { BASE_SIZE } from "../constants";
-import { getCoords, updateCoordsOfItem } from "../functions";
+import { getCoords, updateCoordsOfItem, handleDoubleClick } from "../functions";
 
 const CenteredText = ({ children }: { children: any }): JSX.Element => {
   return <div className="centeredText">{children}</div>;
@@ -12,10 +13,12 @@ export const Cube = ({
   item,
   initialCoords,
   openModal,
+  currentlyOpen,
 }: {
   item: PersonalItem;
   initialCoords: number[];
   openModal: (it: PersonalItem) => void;
+  currentlyOpen: boolean;
 }): JSX.Element => {
   const { id, name, size, color, coords } = item;
   const heightNum = BASE_SIZE * size[0] - 4;
@@ -36,18 +39,12 @@ export const Cube = ({
     updateCoordsOfItem(id, newCoords);
   };
 
-  const handleDoubleClick = (e: any) => {
-    if (e.detail === 2) {
-      openModal(item);
-    }
-  };
-
   return (
     <Draggable defaultPosition={defaultPos} onStop={onDrop}>
       <div
-        className="cube"
+        className={cn("cube", { ["cube-open"]: currentlyOpen })}
         style={{ height, width, backgroundColor: color }}
-        onClick={handleDoubleClick}
+        onClick={(e) => handleDoubleClick(e, () => openModal(item))}
       >
         <CenteredText>{name}</CenteredText>
       </div>

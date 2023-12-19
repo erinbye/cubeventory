@@ -89,6 +89,7 @@ export const ItemModal = ({
   onClose: () => void;
   setCurrentItems: (items: PersonalItem[]) => void;
 }) => {
+  const ref = useRef(null);
   const removeItem = () => {
     removeLocalItem(item, setCurrentItems);
     onClose();
@@ -100,8 +101,9 @@ export const ItemModal = ({
   const updateTitle = (newTitle: string) => {
     updateLocalItem(item.id, "name", newTitle, setCurrentItems);
   };
+  useOnClickOutside(ref, onClose);
   return (
-    <div className="itemModal">
+    <div className="itemModal" ref={ref}>
       <TitleBox title={item.name} updateTitle={updateTitle} />
       <div className="modalBottomLeft">
         <SmallIconButton
