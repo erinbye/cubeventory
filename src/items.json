@@ -1,7 +1,16 @@
 {
   "items": [
-    { "name": "1/4", "size": [1, 1], "color": "white" },
-    { "name": "1", "size": [2, 2], "color": "lightblue" },
+    { "name": "1/4 lbs", "size": [1, 1], "color": "lightblue" },
+    { "name": "1 lbs", "size": [2, 2], "color": "lightblue" },
+    { "name": "2 lbs", "size": [2, 4], "color": "lightblue"},
+    { "name": "3 lbs", "size": [3, 4], "color": "lightblue"},
+    { "name": "4 lbs", "size": [4, 4], "color": "lightblue"},
+    { "name": "5 lbs", "size": [5, 4], "color": "lightblue"},
+    { "name": "8 lbs", "size": [8, 4], "color": "lightblue"},
+    { "name": "10 lbs", "size": [8, 5], "color": "lightblue"},
+    { "name": "12 lbs", "size": [8, 6], "color": "lightblue"},
+    { "name": "15 lbs", "size": [10, 6], "color": "lightblue"},
+    { "name": "20 lbs", "size": [10, 8], "color": "lightblue"},
 
     { "name": "Club", "size": [2, 4], "color": "pink" },
     { "name": "Dagger", "size": [1, 4], "color": "pink" },
