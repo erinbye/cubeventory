@@ -15,6 +15,7 @@ import {
   setLocalItems,
   generateId,
   getCoords,
+  changeChoiceItemToPersonalItem,
 } from "./functions";
 
 const App = (): JSX.Element => {
@@ -44,7 +45,7 @@ const App = (): JSX.Element => {
 
   const addLocalItem = (newItem: ChoiceItem) => {
     const parsedItems = getLocalItems();
-    const newItemWithId = { ...newItem, id: generateId() } as PersonalItem;
+    const newItemWithId = changeChoiceItemToPersonalItem(newItem);
     parsedItems.push(newItemWithId);
     setCurrentItemsLocally(parsedItems);
   };

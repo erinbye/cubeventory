@@ -1,7 +1,7 @@
 export interface ChoiceItem {
   name: string;
   size: number[];
-  color: string;
+  type: string;
 }
 
 // adds id and coords

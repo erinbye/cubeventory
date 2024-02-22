@@ -1,5 +1,7 @@
-import { PersonalItem } from "./types";
+import { PersonalItem, ChoiceItem } from "./types";
 import {
+  BlockType,
+  COLORS_BY_TYPE,
   INITIAL_STRENGTH,
   INVENTORY_ITEMS_KEY,
   STRENGTH_KEY,
@@ -80,6 +82,21 @@ const handleDoubleClick = (e: any, func: () => void) => {
   }
 };
 
+const getColorFromType = (type: string): string => {
+  return COLORS_BY_TYPE[type as BlockType];
+};
+
+const changeChoiceItemToPersonalItem = (
+  choiceItem: ChoiceItem
+): PersonalItem => {
+  return {
+    id: generateId(),
+    name: choiceItem.name,
+    size: choiceItem.size,
+    color: getColorFromType(choiceItem.type),
+  };
+};
+
 export {
   getLocalStrength,
   setLocalStrength,
@@ -91,4 +108,5 @@ export {
   getCoords,
   updateLocalItem,
   handleDoubleClick,
+  changeChoiceItemToPersonalItem,
 };
