@@ -5,12 +5,12 @@ const INVENTORY_ITEMS_KEY = "inventory_items";
 const STRENGTH_KEY = "strength";
 
 enum COLORS_BY_TYPE {
-  weapon = "#F65F58", // red
-  ammo = "#F5D87E", // yellow
-  magic = "#9B87FD", // purple
-  tools = "#78C478", // green
-  misc = "#7EABF5", // blue
-  basic = "#D1DAF3", // grey
+  weapon = "#E97777", // red
+  ammo = "#FDF7C3", // yellow
+  magic = "#D0BFFF", // purple
+  tools = "#BBD6B8", // green
+  misc = "#B5DEFF", // blue
+  basic = "#FEFBF3", // grey
 }
 
 export type BlockType =

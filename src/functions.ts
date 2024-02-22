@@ -103,7 +103,6 @@ export {
   getLocalItems,
   setLocalItems,
   removeLocalItem,
-  generateId,
   updateCoordsOfItem,
   getCoords,
   updateLocalItem,
