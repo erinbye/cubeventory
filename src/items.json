@@ -53,7 +53,7 @@
 
     { "name": "Arcane Focus: Crystal", "size": [2, 2], "type": "magic" },
     { "name": "Arcane Focus: Orb", "size": [3, 3], "type": "magic" },
-    { "name": "Arcane Focus: Rob", "size": [2, 4], "type": "magic" },
+    { "name": "Arcane Focus: Rod", "size": [2, 4], "type": "magic" },
     { "name": "Arcane Focus: Staff", "size": [16, 1], "type": "magic" },
     { "name": "Arcane Focus: Wand", "size": [1, 4], "type": "magic" },
     { "name": "Component Pouch", "size": [2, 4], "type": "magic" },
