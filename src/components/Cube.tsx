@@ -51,6 +51,7 @@ export const Cube = ({
         className={cn("cube", { ["cube-open"]: currentlyOpen })}
         style={{ height, width, backgroundColor: color }}
         onClick={(e) => handleDoubleClick(e, () => openModal(item))}
+        onPointerDown={() => openModal(item)}
       >
         <CenteredText>{name}</CenteredText>
       </div>
