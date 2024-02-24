@@ -33,13 +33,15 @@ export const Dropdown = ({
     <FormControl fullWidth>
       <InputLabel>{label}</InputLabel>
       <Select value={choiceName} label={label} onChange={handleChange}>
-        {choices.map((item) => {
-          return (
-            <MenuItem key={item} value={item}>
-              {item}
-            </MenuItem>
-          );
-        })}
+        {choices
+          .sort((a, b) => a.localeCompare(b))
+          .map((item) => {
+            return (
+              <MenuItem key={item} value={item}>
+                {item}
+              </MenuItem>
+            );
+          })}
       </Select>
     </FormControl>
   );
