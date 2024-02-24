@@ -9,6 +9,6 @@ export interface PersonalItem {
   id: string;
   name: string;
   size: number[];
-  color: string;
+  type: string;
   coords?: number[];
 }

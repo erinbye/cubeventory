@@ -93,7 +93,7 @@ const changeChoiceItemToPersonalItem = (
     id: generateId(),
     name: choiceItem.name,
     size: choiceItem.size,
-    color: getColorFromType(choiceItem.type),
+    type: choiceItem.type,
   };
 };
 
@@ -108,4 +108,5 @@ export {
   updateLocalItem,
   handleDoubleClick,
   changeChoiceItemToPersonalItem,
+  getColorFromType,
 };
