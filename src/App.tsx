@@ -13,9 +13,10 @@ import {
   setLocalStrength,
   getLocalItems,
   setLocalItems,
-  generateId,
   getCoords,
+  changeChoiceItemToPersonalItem,
 } from "./functions";
+import { DeleteAllButton } from "./components/DeleteAllButton";
 
 const App = (): JSX.Element => {
   const choices = jsonData.items;
@@ -44,7 +45,7 @@ const App = (): JSX.Element => {
 
   const addLocalItem = (newItem: ChoiceItem) => {
     const parsedItems = getLocalItems();
-    const newItemWithId = { ...newItem, id: generateId() } as PersonalItem;
+    const newItemWithId = changeChoiceItemToPersonalItem(newItem);
     parsedItems.push(newItemWithId);
     setCurrentItemsLocally(parsedItems);
   };
@@ -103,14 +104,7 @@ const App = (): JSX.Element => {
                   setExternally={setExternalStrength}
                   initialChoice={strength.toString()}
                 />
-                <Button
-                  variant="contained"
-                  color="error"
-                  onClick={() => setCurrentItemsLocally([])}
-                  disabled={true}
-                >
-                  Delete All Items
-                </Button>
+                <DeleteAllButton onDelete={() => setCurrentItemsLocally([])} />
               </Grid>
               <Grid container item xs>
                 <div className="item-container">
@@ -150,17 +144,19 @@ const App = (): JSX.Element => {
           <Grid item className="item-list" xs={2}>
             <div className="list-box">
               <Stack height="100%" padding={2}>
-                {currentItems.map((item) => (
-                  <div
-                    className="list-item"
-                    style={
-                      openedItem === item ? { fontWeight: "bold" } : undefined
-                    }
-                    onClick={() => setOpenedItem(item)}
-                  >
-                    {item.name}
-                  </div>
-                ))}
+                {currentItems
+                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .map((item) => (
+                    <div
+                      className="list-item"
+                      style={
+                        openedItem === item ? { fontWeight: "bold" } : undefined
+                      }
+                      onClick={() => setOpenedItem(item)}
+                    >
+                      {item.name}
+                    </div>
+                  ))}
               </Stack>
             </div>
           </Grid>

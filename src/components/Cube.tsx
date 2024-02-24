@@ -3,7 +3,12 @@ import cn from "classnames";
 import Draggable from "react-draggable";
 import { PersonalItem } from "../types";
 import { BASE_SIZE } from "../constants";
-import { getCoords, updateCoordsOfItem, handleDoubleClick } from "../functions";
+import {
+  getCoords,
+  updateCoordsOfItem,
+  handleDoubleClick,
+  getColorFromType,
+} from "../functions";
 
 const CenteredText = ({ children }: { children: any }): JSX.Element => {
   return <div className="centeredText">{children}</div>;
@@ -20,7 +25,8 @@ export const Cube = ({
   openModal: (it: PersonalItem) => void;
   currentlyOpen: boolean;
 }): JSX.Element => {
-  const { id, name, size, color, coords } = item;
+  const { id, name, size, type, coords } = item;
+  const color = getColorFromType(type);
   const heightNum = BASE_SIZE * size[0] - 4;
   const widthNum = BASE_SIZE * size[1] - 4;
   let defaultPos = {
