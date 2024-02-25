@@ -47,18 +47,19 @@ const TitleBox = ({
   };
   useOnClickOutside(ref, handleSave);
   return (
-    <div ref={ref} onClick={() => setIsEditing(true)}>
+    <>
       {isEditing ? (
         <TextField
+          ref={ref}
           error={error}
           value={tempTitle}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
       ) : (
-        <Box>{tempTitle}</Box>
+        <Box onClick={() => setIsEditing(true)}>{tempTitle}</Box>
       )}
-    </div>
+    </>
   );
 };
 
