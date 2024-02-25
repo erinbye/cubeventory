@@ -146,7 +146,12 @@ const App = (): JSX.Element => {
           </Grid>
           <Grid item className="item-list" xs={2}>
             <div className="list-box">
-              <Stack height="100%" padding={2}>
+              <Stack height="100%" padding={2} spacing={0.5}>
+                <div style={{ paddingBottom: "16px", fontWeight: "500" }}>
+                  {`Total: ${currentItems
+                    .map((item) => getWeight(item.size))
+                    .reduce((partialSum, a) => partialSum + a, 0)} lbs`}
+                </div>
                 {currentItems
                   .sort((a, b) => a.name.localeCompare(b.name))
                   .map((item) => (
@@ -157,9 +162,6 @@ const App = (): JSX.Element => {
                       setOpenedItem={setOpenedItem}
                     />
                   ))}
-                {`Total: ${currentItems
-                  .map((item) => getWeight(item.size))
-                  .reduce((partialSum, a) => partialSum + a, 0)}lbs`}
               </Stack>
             </div>
           </Grid>

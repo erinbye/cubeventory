@@ -17,7 +17,7 @@ export const ListItem = ({
       style={openedItem?.id === item.id ? { fontWeight: "bold" } : undefined}
       onClick={() => setOpenedItem(item)}
     >
-      {`${item.name} (${weight}lbs)`}
+      {`${item.name} [${weight}]`}
     </div>
   );
 };
