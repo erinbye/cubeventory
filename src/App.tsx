@@ -1,5 +1,5 @@
 import "./App.css";
-import { Grid, Button, Stack } from "@mui/material";
+import { Grid, Stack } from "@mui/material";
 import { useState, useRef } from "react";
 import jsonData from "./items.json";
 import { ItemModal } from "./components/ItemModal";
@@ -71,7 +71,7 @@ const App = (): JSX.Element => {
           item={it}
           initialCoords={initialCubeCoords}
           openModal={openItemModal}
-          currentlyOpen={openedItem === it}
+          currentlyOpen={openedItem?.id === it.id}
         />
       ))}
       {openedItem ? (
@@ -99,6 +99,7 @@ const App = (): JSX.Element => {
                   label="Choices"
                   setExternally={selectedChoice}
                   resetAfterPick
+                  isSorted
                 />
                 <Dropdown
                   choices={oneToTwenty}
@@ -150,6 +151,7 @@ const App = (): JSX.Element => {
                   .sort((a, b) => a.name.localeCompare(b.name))
                   .map((item) => (
                     <ListItem
+                      key={item.id}
                       item={item}
                       openedItem={openedItem}
                       setOpenedItem={setOpenedItem}

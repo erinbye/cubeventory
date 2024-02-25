@@ -54,7 +54,7 @@ const removeLocalItem = (
 ) => {
   const localItems = getLocalItems();
   const updatedItems = localItems.filter(
-    (locItem) => locItem.id != itemToRemove.id
+    (locItem) => locItem.id !== itemToRemove.id
   );
   setCurrentItems(updatedItems);
 };
@@ -76,12 +76,6 @@ const getCoords = (el: HTMLElement) => {
   return [rect.x + window.scrollX, rect.y + window.scrollY];
 };
 
-const handleDoubleClick = (e: any, func: () => void) => {
-  if (e.detail === 2) {
-    func();
-  }
-};
-
 const getColorFromType = (type: string): string => {
   return COLORS_BY_TYPE[type as BlockType];
 };
@@ -98,7 +92,6 @@ const changeChoiceItemToPersonalItem = (
 };
 
 const getWeight = (size: number[] | undefined): number => {
-  console.log(size);
   if (!size) {
     return 0;
   }
@@ -114,7 +107,6 @@ export {
   updateCoordsOfItem,
   getCoords,
   updateLocalItem,
-  handleDoubleClick,
   changeChoiceItemToPersonalItem,
   getColorFromType,
   getWeight,

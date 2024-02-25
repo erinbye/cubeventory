@@ -14,7 +14,7 @@ export const ListItem = ({
   return (
     <div
       className="list-item"
-      style={openedItem === item ? { fontWeight: "bold" } : undefined}
+      style={openedItem?.id === item.id ? { fontWeight: "bold" } : undefined}
       onClick={() => setOpenedItem(item)}
     >
       {`${item.name} (${weight}lbs)`}
