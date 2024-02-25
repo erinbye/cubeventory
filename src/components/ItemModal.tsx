@@ -29,7 +29,6 @@ const TitleBox = ({
     setTempTitle(newVal);
   };
   const handleSave = () => {
-    console.log("hello");
     if (error) {
       return;
     }
