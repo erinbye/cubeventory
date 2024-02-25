@@ -3,12 +3,8 @@ import cn from "classnames";
 import Draggable from "react-draggable";
 import { PersonalItem } from "../types";
 import { BASE_SIZE } from "../constants";
-import {
-  getCoords,
-  updateCoordsOfItem,
-  handleDoubleClick,
-  getColorFromType,
-} from "../functions";
+import { getCoords, updateCoordsOfItem, getColorFromType } from "../functions";
+import React, { useState } from "react";
 
 const CenteredText = ({ children }: { children: any }): JSX.Element => {
   return <div className="centeredText">{children}</div>;
@@ -45,13 +41,26 @@ export const Cube = ({
     updateCoordsOfItem(id, newCoords);
   };
 
+  // on touchscreens, we want to handle double taps
+  // as onDoubleClick doesn't listen for that
+  const [lastTapTime, setLastTapTime] = useState<number>(0);
+  const handleTouch = (e: React.PointerEvent) => {
+    if (e.pointerType === "touch") {
+      const currentTapTime = e.timeStamp;
+      if (currentTapTime - lastTapTime < 200) {
+        openModal(item);
+      }
+      setLastTapTime(e.timeStamp);
+    }
+  };
+
   return (
     <Draggable defaultPosition={defaultPos} onStop={onDrop}>
       <div
         className={cn("cube", { ["cube-open"]: currentlyOpen })}
         style={{ height, width, backgroundColor: color }}
-        onClick={(e) => handleDoubleClick(e, () => openModal(item))}
-        onPointerDown={() => openModal(item)}
+        onPointerDown={(e) => handleTouch(e)}
+        onDoubleClick={() => openModal(item)}
       >
         <CenteredText>{name}</CenteredText>
       </div>

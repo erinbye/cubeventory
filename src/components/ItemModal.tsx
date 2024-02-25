@@ -1,5 +1,5 @@
 import "../App.css";
-import { Tooltip, Box, IconButton, TextField } from "@mui/material";
+import { Tooltip, Box, IconButton, TextField, Backdrop } from "@mui/material";
 import { PersonalItem } from "../types";
 import { removeLocalItem, updateLocalItem } from "../functions";
 import CloseIcon from "@mui/icons-material/Close";
@@ -103,27 +103,31 @@ export const ItemModal = ({
   };
   useOnClickOutside(ref, onClose);
   return (
-    <div className="itemModal" ref={ref}>
-      <TitleBox title={item.name} updateTitle={updateTitle} />
-      <div className="modalBottomLeft">
-        <SmallIconButton
-          tooltipText="Delete item"
-          onClick={removeItem}
-          icon={<DeleteIcon fontSize="small" />}
-        />
-        <SmallIconButton
-          tooltipText="Rotate item"
-          onClick={rotateItem}
-          icon={<Rotate90DegreesCwIcon fontSize="small" />}
-        />
-      </div>
-      <div className="modalBottomRight">
-        <SmallIconButton
-          tooltipText="Close popup"
-          onClick={onClose}
-          icon={<CloseIcon fontSize="small" />}
-        />
-      </div>
-    </div>
+    <>
+      <Backdrop open={true} sx={{ zIndex: 10 }}>
+        <div className="itemModal" ref={ref}>
+          <TitleBox title={item.name} updateTitle={updateTitle} />
+          <div className="modalBottomLeft">
+            <SmallIconButton
+              tooltipText="Delete item"
+              onClick={removeItem}
+              icon={<DeleteIcon fontSize="small" />}
+            />
+            <SmallIconButton
+              tooltipText="Rotate item"
+              onClick={rotateItem}
+              icon={<Rotate90DegreesCwIcon fontSize="small" />}
+            />
+          </div>
+          <div className="modalBottomRight">
+            <SmallIconButton
+              tooltipText="Close popup"
+              onClick={onClose}
+              icon={<CloseIcon fontSize="small" />}
+            />
+          </div>
+        </div>
+      </Backdrop>
+    </>
   );
 };

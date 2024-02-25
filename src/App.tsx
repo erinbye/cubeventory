@@ -1,5 +1,5 @@
 import "./App.css";
-import { Grid, Button, Stack } from "@mui/material";
+import { Grid, Stack } from "@mui/material";
 import { useState, useRef } from "react";
 import jsonData from "./items.json";
 import { ItemModal } from "./components/ItemModal";
@@ -15,8 +15,10 @@ import {
   setLocalItems,
   getCoords,
   changeChoiceItemToPersonalItem,
+  getWeight,
 } from "./functions";
 import { DeleteAllButton } from "./components/DeleteAllButton";
+import { ListItem } from "./components/ListItem";
 
 const App = (): JSX.Element => {
   const choices = jsonData.items;
@@ -69,7 +71,7 @@ const App = (): JSX.Element => {
           item={it}
           initialCoords={initialCubeCoords}
           openModal={openItemModal}
-          currentlyOpen={openedItem === it}
+          currentlyOpen={openedItem?.id === it.id}
         />
       ))}
       {openedItem ? (
@@ -97,6 +99,7 @@ const App = (): JSX.Element => {
                   label="Choices"
                   setExternally={selectedChoice}
                   resetAfterPick
+                  isSorted
                 />
                 <Dropdown
                   choices={oneToTwenty}
@@ -147,16 +150,16 @@ const App = (): JSX.Element => {
                 {currentItems
                   .sort((a, b) => a.name.localeCompare(b.name))
                   .map((item) => (
-                    <div
-                      className="list-item"
-                      style={
-                        openedItem === item ? { fontWeight: "bold" } : undefined
-                      }
-                      onClick={() => setOpenedItem(item)}
-                    >
-                      {item.name}
-                    </div>
+                    <ListItem
+                      key={item.id}
+                      item={item}
+                      openedItem={openedItem}
+                      setOpenedItem={setOpenedItem}
+                    />
                   ))}
+                {`Total: ${currentItems
+                  .map((item) => getWeight(item.size))
+                  .reduce((partialSum, a) => partialSum + a, 0)}lbs`}
               </Stack>
             </div>
           </Grid>
