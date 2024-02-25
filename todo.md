@@ -5,3 +5,4 @@
     so when you add an item, it can subtract from the overall weight
     (ex. efficient quiver can hold up to say 30 lbs and you place a longbow, 4lb, in it so it's 4/30, 26 left)
   - add "includes" to PersonalItem as an array
+  - ~~a weight next to list of items and total weight on the bottom~~

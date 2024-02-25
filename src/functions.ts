@@ -97,6 +97,14 @@ const changeChoiceItemToPersonalItem = (
   };
 };
 
+const getWeight = (size: number[] | undefined): number => {
+  console.log(size);
+  if (!size) {
+    return 0;
+  }
+  return (size[0] * size[1]) / 4;
+};
+
 export {
   getLocalStrength,
   setLocalStrength,
@@ -109,4 +117,5 @@ export {
   handleDoubleClick,
   changeChoiceItemToPersonalItem,
   getColorFromType,
+  getWeight,
 };

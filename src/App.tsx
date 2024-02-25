@@ -15,8 +15,10 @@ import {
   setLocalItems,
   getCoords,
   changeChoiceItemToPersonalItem,
+  getWeight,
 } from "./functions";
 import { DeleteAllButton } from "./components/DeleteAllButton";
+import { ListItem } from "./components/ListItem";
 
 const App = (): JSX.Element => {
   const choices = jsonData.items;
@@ -147,16 +149,15 @@ const App = (): JSX.Element => {
                 {currentItems
                   .sort((a, b) => a.name.localeCompare(b.name))
                   .map((item) => (
-                    <div
-                      className="list-item"
-                      style={
-                        openedItem === item ? { fontWeight: "bold" } : undefined
-                      }
-                      onClick={() => setOpenedItem(item)}
-                    >
-                      {item.name}
-                    </div>
+                    <ListItem
+                      item={item}
+                      openedItem={openedItem}
+                      setOpenedItem={setOpenedItem}
+                    />
                   ))}
+                {`Total: ${currentItems
+                  .map((item) => getWeight(item.size))
+                  .reduce((partialSum, a) => partialSum + a, 0)}lbs`}
               </Stack>
             </div>
           </Grid>
