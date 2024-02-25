@@ -29,6 +29,7 @@ const TitleBox = ({
     setTempTitle(newVal);
   };
   const handleSave = () => {
+    console.log("hello");
     if (error) {
       return;
     }
@@ -47,9 +48,10 @@ const TitleBox = ({
   };
   useOnClickOutside(ref, handleSave);
   return (
-    <div ref={ref} onClick={() => setIsEditing(true)}>
+    <div onClick={() => setIsEditing(true)}>
       {isEditing ? (
         <TextField
+          ref={ref}
           error={error}
           value={tempTitle}
           onChange={handleChange}
