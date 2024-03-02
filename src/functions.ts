@@ -76,6 +76,14 @@ const getCoords = (el: HTMLElement) => {
   return [rect.x + window.scrollX, rect.y + window.scrollY];
 };
 
+const addDeltaToCoords = (
+  itemCoords: number[],
+  delta: { x: number; y: number }
+): number[] => {
+  const newCoords = [itemCoords[0] + delta.x, itemCoords[1] + delta.y];
+  return newCoords;
+};
+
 const getColorFromType = (type: string): string => {
   return COLORS_BY_TYPE[type as BlockType];
 };
@@ -110,4 +118,5 @@ export {
   changeChoiceItemToPersonalItem,
   getColorFromType,
   getWeight,
+  addDeltaToCoords,
 };
