@@ -15,11 +15,13 @@ export const Cube = ({
   initialCoords,
   openModal,
   currentlyOpen,
+  allCubesSelected,
 }: {
   item: PersonalItem;
   initialCoords: number[];
   openModal: (it: PersonalItem) => void;
   currentlyOpen: boolean;
+  allCubesSelected: boolean;
 }): JSX.Element => {
   const { id, name, size, type, coords } = item;
   const color = getColorFromType(type);
@@ -55,9 +57,15 @@ export const Cube = ({
   };
 
   return (
-    <Draggable defaultPosition={defaultPos} onStop={onDrop}>
+    <Draggable
+      defaultPosition={defaultPos}
+      onStop={onDrop}
+      disabled={allCubesSelected}
+    >
       <div
-        className={cn("cube", { ["cube-open"]: currentlyOpen })}
+        className={cn("cube", {
+          ["cube-open"]: currentlyOpen || allCubesSelected,
+        })}
         style={{ height, width, backgroundColor: color }}
         onPointerDown={(e) => handleTouch(e)}
         onDoubleClick={() => openModal(item)}

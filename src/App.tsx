@@ -1,5 +1,5 @@
 import "./App.css";
-import { Grid, Stack } from "@mui/material";
+import { Button, Grid, Stack } from "@mui/material";
 import { useState, useRef } from "react";
 import jsonData from "./items.json";
 import { ItemModal } from "./components/ItemModal";
@@ -19,6 +19,7 @@ import {
 } from "./functions";
 import { DeleteAllButton } from "./components/DeleteAllButton";
 import { ListItem } from "./components/ListItem";
+import { DraggableCubeContainer } from "./components/DraggableCubeContainer";
 
 const App = (): JSX.Element => {
   const choices = jsonData.items;
@@ -27,6 +28,7 @@ const App = (): JSX.Element => {
     getLocalItems()
   );
   const [openedItem, setOpenedItem] = useState<PersonalItem | null>(null);
+  const [selectAllCubes, setSelectAllCubes] = useState(false);
   const centerItemContainerRef = useRef<HTMLDivElement>(null);
   const initialCubeCoords = centerItemContainerRef.current
     ? getCoords(centerItemContainerRef.current)
@@ -63,17 +65,29 @@ const App = (): JSX.Element => {
     setOpenedItem(item);
   };
 
+  const handleSelectAll = () => {
+    setSelectAllCubes(!selectAllCubes);
+  };
+
   return (
     <div>
-      {currentItems.map((it) => (
-        <Cube
-          key={it.id}
-          item={it}
-          initialCoords={initialCubeCoords}
-          openModal={openItemModal}
-          currentlyOpen={openedItem?.id === it.id}
-        />
-      ))}
+      <DraggableCubeContainer
+        disabled={!selectAllCubes}
+        allCubes={currentItems}
+      >
+        <>
+          {currentItems.map((it) => (
+            <Cube
+              key={it.id}
+              item={it}
+              initialCoords={initialCubeCoords}
+              openModal={openItemModal}
+              currentlyOpen={openedItem?.id === it.id}
+              allCubesSelected={selectAllCubes}
+            />
+          ))}
+        </>
+      </DraggableCubeContainer>
       {openedItem ? (
         <ItemModal
           item={openedItem}
@@ -93,7 +107,7 @@ const App = (): JSX.Element => {
               height="100%"
               direction="column"
             >
-              <Grid container item xs={3}>
+              <Grid container item xs={4} gap={1}>
                 <Dropdown
                   choices={choices.map((choice) => choice.name)}
                   label="Choices"
@@ -108,6 +122,13 @@ const App = (): JSX.Element => {
                   initialChoice={strength.toString()}
                 />
                 <DeleteAllButton onDelete={() => setCurrentItemsLocally([])} />
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={() => handleSelectAll()}
+                >
+                  {selectAllCubes ? "Deselect All" : "Select All"}
+                </Button>
               </Grid>
               <Grid container item xs>
                 <div className="item-container">
@@ -146,7 +167,12 @@ const App = (): JSX.Element => {
           </Grid>
           <Grid item className="item-list" xs={2}>
             <div className="list-box">
-              <Stack height="100%" padding={2}>
+              <Stack height="100%" padding={2} spacing={0.5}>
+                <div style={{ paddingBottom: "16px", fontWeight: "500" }}>
+                  {`Total: ${currentItems
+                    .map((item) => getWeight(item.size))
+                    .reduce((partialSum, a) => partialSum + a, 0)} lbs`}
+                </div>
                 {currentItems
                   .sort((a, b) => a.name.localeCompare(b.name))
                   .map((item) => (
@@ -157,9 +183,6 @@ const App = (): JSX.Element => {
                       setOpenedItem={setOpenedItem}
                     />
                   ))}
-                {`Total: ${currentItems
-                  .map((item) => getWeight(item.size))
-                  .reduce((partialSum, a) => partialSum + a, 0)}lbs`}
               </Stack>
             </div>
           </Grid>
