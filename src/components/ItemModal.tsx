@@ -8,31 +8,36 @@ import Rotate90DegreesCwIcon from "@mui/icons-material/Rotate90DegreesCw";
 import { useState, useRef } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 
-const TitleBox = ({
-  title,
-  updateTitle,
+const InputBox = ({
+  value,
+  updateValue,
+  includeEmptyState = false,
+  multiline = false,
 }: {
-  title: string;
-  updateTitle: (title: string) => void;
+  value: string;
+  updateValue: (value: string) => void;
+  includeEmptyState?: boolean;
+  multiline?: boolean;
 }) => {
   const ref = useRef(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [tempTitle, setTempTitle] = useState(title);
+  const [tempValue, setTempValue] = useState(value);
   const [error, setError] = useState(false);
+  const showEmptyState = includeEmptyState && tempValue === "";
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newVal = e.target.value;
-    if (newVal === "") {
+    if (!includeEmptyState && newVal === "") {
       setError(true);
     } else {
       setError(false);
     }
-    setTempTitle(newVal);
+    setTempValue(newVal);
   };
   const handleSave = () => {
     if (error) {
       return;
     }
-    updateTitle(tempTitle);
+    updateValue(tempValue);
     setIsEditing(false);
   };
   const handleCancel = () => {
@@ -46,18 +51,23 @@ const TitleBox = ({
     }
   };
   useOnClickOutside(ref, handleSave);
+
   return (
     <>
       {isEditing ? (
         <TextField
           ref={ref}
           error={error}
-          value={tempTitle}
+          value={tempValue}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
+          multiline={multiline}
+          fullWidth
         />
       ) : (
-        <Box onClick={() => setIsEditing(true)}>{tempTitle}</Box>
+        <Box onClick={() => setIsEditing(true)} sx={{ cursor: "pointer" }}>
+          {showEmptyState ? "+ add" : tempValue}
+        </Box>
       )}
     </>
   );
@@ -102,12 +112,30 @@ export const ItemModal = ({
   const updateTitle = (newTitle: string) => {
     updateLocalItem(item.id, "name", newTitle, setCurrentItems);
   };
+  const updateNotes = (newNotes: string) => {
+    updateLocalItem(item.id, "notes", newNotes, setCurrentItems);
+  };
   useOnClickOutside(ref, onClose);
   return (
     <>
       <Backdrop open={true} sx={{ zIndex: 10 }}>
         <div className="itemModal" ref={ref}>
-          <TitleBox title={item.name} updateTitle={updateTitle} />
+          <Box mb={2}>
+            <InputBox value={item.name} updateValue={updateTitle} />
+          </Box>
+
+          <Box>
+            <Box sx={{ fontWeight: 500 }} mb={0.5}>
+              Notes
+            </Box>
+            <InputBox
+              value={item.notes ?? ""}
+              updateValue={updateNotes}
+              includeEmptyState
+              multiline
+            />
+          </Box>
+
           <div className="modalBottomLeft">
             <SmallIconButton
               tooltipText="Delete item"

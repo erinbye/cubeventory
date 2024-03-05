@@ -11,4 +11,5 @@ export interface PersonalItem {
   size: number[];
   type: string;
   coords?: number[];
+  notes?: string;
 }
