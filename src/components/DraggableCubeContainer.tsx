@@ -1,7 +1,7 @@
 import Draggable from "react-draggable";
 import React, { useState } from "react";
 import { PersonalItem } from "../types";
-import { addDeltaToCoords, getCoords, updateCoordsOfItem } from "../functions";
+import { addDeltaToCoords, updateCoordsOfMultipleItems } from "../functions";
 
 export const DraggableCubeContainer = ({
   children,
@@ -22,14 +22,14 @@ export const DraggableCubeContainer = ({
     setDeltaPositions(newPositions);
   };
   const onDrop = () => {
-    allCubes.forEach((item) => {
-      console.log({ item });
+    const itemsToUpdate = allCubes.map((item) => {
       if (item.coords) {
         const newCoords = addDeltaToCoords(item.coords, deltaPositions);
-        console.log({ coords: item.coords, newCoords });
-        updateCoordsOfItem(item.id, newCoords);
+        return { id: item.id, newCoords };
       }
+      return null;
     });
+    updateCoordsOfMultipleItems(itemsToUpdate);
   };
   return (
     <Draggable disabled={disabled} onDrag={handleDrag} onStop={onDrop}>
