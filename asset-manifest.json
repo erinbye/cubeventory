@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/cubeventory/static/css/main.d95b7c16.css",
-    "main.js": "/cubeventory/static/js/main.40a866ed.js",
+    "main.js": "/cubeventory/static/js/main.72b58b3d.js",
     "index.html": "/cubeventory/index.html",
     "main.d95b7c16.css.map": "/cubeventory/static/css/main.d95b7c16.css.map",
-    "main.40a866ed.js.map": "/cubeventory/static/js/main.40a866ed.js.map"
+    "main.72b58b3d.js.map": "/cubeventory/static/js/main.72b58b3d.js.map"
   },
   "entrypoints": [
     "static/css/main.d95b7c16.css",
-    "static/js/main.40a866ed.js"
+    "static/js/main.72b58b3d.js"
   ]
 }
