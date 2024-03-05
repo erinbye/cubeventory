@@ -71,6 +71,26 @@ const updateCoordsOfItem = (itemIdToUpdate: string, newCoords: number[]) => {
   setLocalItems(updatedItems);
 };
 
+type ItemToUpdateCoords = {
+  id: string;
+  newCoords: number[];
+};
+
+const updateCoordsOfMultipleItems = (
+  itemsToUpdate: (ItemToUpdateCoords | null)[]
+) => {
+  const allItems = getLocalItems();
+  const updatedItems = allItems.map((locItem) => {
+    const itemToUpdate = itemsToUpdate.find((itUp) => itUp?.id === locItem.id);
+    if (itemToUpdate) {
+      return { ...locItem, coords: itemToUpdate.newCoords };
+    } else {
+      return locItem;
+    }
+  });
+  setLocalItems(updatedItems);
+};
+
 const getCoords = (el: HTMLElement) => {
   const rect = el.getBoundingClientRect();
   return [rect.x + window.scrollX, rect.y + window.scrollY];
@@ -119,4 +139,5 @@ export {
   getColorFromType,
   getWeight,
   addDeltaToCoords,
+  updateCoordsOfMultipleItems,
 };
